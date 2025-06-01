@@ -5,7 +5,7 @@ from app.models import Job
 from app.database import get_db
 from app.core.logger import logger
 
-router = APIRouter(prefix="/jobs", tags=["Jobs"])
+router = APIRouter(tags=["Jobs"])
 
 @router.post("", status_code=201)
 def create_job(job: JobCreate, db: Session = Depends(get_db)):

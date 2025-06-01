@@ -5,7 +5,7 @@ from app.models import Department
 from app.database import get_db
 from app.core.logger import logger
 
-router = APIRouter(prefix="/departments", tags=["Departments"])
+router = APIRouter(tags=["Departments"])
 
 @router.post("", status_code=201)
 def create_department(dept: DepartmentCreate, db: Session = Depends(get_db)):

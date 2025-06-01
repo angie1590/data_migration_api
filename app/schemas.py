@@ -16,6 +16,3 @@ class HiredEmployeeCreate(BaseModel):
     datetime: datetime
     department_id: int
     job_id: int
-
-class BatchHiredEmployee(BaseModel):
-    employees: List[HiredEmployeeCreate]

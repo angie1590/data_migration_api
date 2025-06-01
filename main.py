@@ -7,6 +7,7 @@ from app.core.logger import logger
 
 from app.routers.department_router import router as department_router
 from app.routers.job_router import router as job_router
+from app.routers.hired_employee_router import router as hired_employee_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -41,3 +42,4 @@ app = FastAPI(
 
 app.include_router(department_router, prefix="/departments", tags=["Departments"])
 app.include_router(job_router, prefix="/jobs", tags=["Jobs"])
+app.include_router(hired_employee_router, prefix="/hired-employees", tags=["Hired Employees"])

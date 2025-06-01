@@ -6,16 +6,13 @@ from app.loaders.base_loader import load_csv_generic
 from app.core.logger import logger
 
 def get_hired_employee_validator(session: Session):
-    # Conjuntos para tracking de IDs inválidos
     invalid_departments = set()
     invalid_jobs = set()
-    invalid_datetimes = []
 
     def validate_hired_employee(row):
         try:
             datetime.strptime(row["datetime"], "%Y-%m-%dT%H:%M:%SZ")
         except ValueError:
-            invalid_datetimes.append((row.get("id"), row["datetime"]))
             raise ValueError(f"Invalid datetime format: {row['datetime']}")
 
         if not session.get(Department, row["department_id"]):
@@ -31,8 +28,6 @@ def get_hired_employee_validator(session: Session):
             logger.warning(f"Invalid department_ids found: {sorted(invalid_departments)}")
         if invalid_jobs:
             logger.warning(f"Invalid job_ids found: {sorted(invalid_jobs)}")
-        if invalid_datetimes:
-            logger.warning(f"Invalid datetime rows: {invalid_datetimes}")
 
     return validate_hired_employee, log_summary
 

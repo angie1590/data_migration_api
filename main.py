@@ -1,8 +1,20 @@
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from app.database import Base, engine
 from app import models
+from app.load_data import load_all_data
+from app.core.logger import logger
 
-Base.metadata.create_all(bind=engine)
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    logger.info("Creating database tables...")
+    Base.metadata.create_all(bind=engine)
+
+    logger.info("Loading historic data into the database...")
+    load_all_data()
+
+    logger.info("System ready to receive new transactions.")
+    yield
 
 app = FastAPI(
     title="Data Migration API",
@@ -20,7 +32,8 @@ app = FastAPI(
 
         All endpoints are designed to be secure, versioned, and easily integrable in automated pipelines.
         """,
-    version="1.0.0"
+    version="1.0.0",
+    lifespan=lifespan
 )
 
 @app.get("/")

@@ -14,9 +14,6 @@ async def lifespan(app: FastAPI):
     logger.info("Creating database tables...")
     Base.metadata.create_all(bind=engine)
 
-    logger.info("Loading historic data into the database...")
-    load_all_data()
-
     logger.info("System ready to receive new transactions.")
     yield
 

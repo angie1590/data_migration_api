@@ -7,20 +7,20 @@ from app.core.logger import logger
 def load_all_data():
     session = SessionLocal()
     try:
-        logger.info("🚀 Starting full data load...")
+        logger.info("Starting full data load...")
 
-        logger.info("🔹 Loading departments...")
+        logger.info("Loading departments...")
         load_departments(session)
 
-        logger.info("🔹 Loading jobs...")
+        logger.info("Loading jobs...")
         load_jobs(session)
 
-        logger.info("🔹 Loading hired employees...")
+        logger.info("Loading hired employees...")
         load_hired_employees(session)
 
-        logger.info("✅ Data load completed successfully.")
+        logger.info("Data load completed successfully.")
     except Exception as e:
-        logger.error(f"❌ Data load failed: {e}")
+        logger.error(f"Data load failed: {e}")
     finally:
         session.close()
-        logger.info("🔚 Database session closed.")
+        logger.info("Database session closed.")

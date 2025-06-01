@@ -5,6 +5,9 @@ from app import models
 from app.load_data import load_all_data
 from app.core.logger import logger
 
+from app.routers.department_router import router as department_router
+from app.routers.job_router import router as job_router
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     logger.info("Creating database tables...")
@@ -36,6 +39,5 @@ app = FastAPI(
     lifespan=lifespan
 )
 
-@app.get("/")
-def read_root():
-    return {"message": "API is running successfully"}
+app.include_router(department_router, prefix="/departments", tags=["Departments"])
+app.include_router(job_router, prefix="/jobs", tags=["Jobs"])

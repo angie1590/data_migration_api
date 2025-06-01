@@ -26,7 +26,7 @@ def get_latest_backup_file(table_name: str, base_dir: str = "backups") -> str | 
 def restore_backup(table_name: str):
     logger.info(f"🚀 Starting restore process for table: {table_name}")
 
-    base_dir = Path(__file__).resolve().parents[2] / "backups"
+    base_dir = Path(__file__).resolve().parents[1] / "backups"
     logger.debug(f"🧭 Backup directory resolved to: {base_dir}")
 
     backup_file = get_latest_backup_file(table_name, base_dir=base_dir)

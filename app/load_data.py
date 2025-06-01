@@ -24,3 +24,6 @@ def load_all_data():
     finally:
         session.close()
         logger.info("Database session closed.")
+
+if __name__ == "__main__":
+    load_all_data()

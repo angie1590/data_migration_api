@@ -57,7 +57,7 @@ This is a Proof of Concept (PoC) API built with FastAPI to support a large-scale
 ### 📦 1. Clone the Repository
 
 ```bash
-git clone <git@github.com:angie1590/data_migration_api.git>
+git clone git@github.com:angie1590/data_migration_api.git
 cd data_migration_api
 ```
 

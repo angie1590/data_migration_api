@@ -62,18 +62,28 @@ cd data_migration_api
 ```
 
 ### 🐍 2. Create Virtual Environment (Optional if not using Docker)
-
+> En estos casos es necesario tener instalado python 3.10 o superior. Además instalar la librería lmaz (brew install xy)
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 ```
 
+### 🔧 Installing `make` on the Local Environment (Windows/Mac) (Must)
+> Required to run `Makefile` commands
+```bash
+# Windows (con Chocolatey)
+choco install make
+
+# Mac
+brew install make
+```
+
 ---
 
 ## 🐳 Docker Deployment (Recommended)
 
-The system is fully dockerized and ready for deployment.
+>The system is fully dockerized and ready for deployment.
 
 ### 🔧 1. Build the Docker Image
 
@@ -114,7 +124,7 @@ make docker-load-historical
 ---
 
 ## 💾 Backup & Restore (AVRO Format)
-You can backup and restore the three tables: departments, jobs, hired_employees. It is possible to do those process for all of them.
+> You can backup and restore the three tables: departments, jobs, hired_employees. It is possible to do those process for all of them.
 
 ### 🔐 Backup from Host:
 

@@ -1,5 +1,6 @@
 TABLE ?= departments
 PYTHON = python
+CURDIR := $(shell pwd)
 
 run:
 	$(PYTHON) -m uvicorn main:app --reload
@@ -40,10 +41,15 @@ docker-build:
 	docker build -t data-migration-api .
 
 docker-run:
-	docker run -p 8000:8000 --name data-api -v $(PWD):/app data-migration-api
+	@if docker ps -a --format '{{.Names}}' | grep -Eq '^data-api$$'; then \
+		echo "Removing existing container data-api..."; \
+		docker rm -f data-api; \
+	fi
+	docker run -p 8000:8000 --name data-api -v "$(CURDIR):/app" data-migration-api
+
 
 docker-run-shell:
-	docker run -it --rm --entrypoint /bin/bash -v $(PWD):/app data-migration-api
+	docker run -it --rm --entrypoint /bin/bash -v "$(CURDIR):/app" data-migration-api
 
 docker-load-historical:
 	docker exec data-api env PYTHONPATH=/app python app/load_data.py
@@ -65,7 +71,7 @@ docker-restore-all:
 docker-inspect-db:
 	docker run -it --rm \
 		--entrypoint /bin/bash \
-		-v $(PWD):/app \
+		-v "$(CURDIR):/app" \
 		data-migration-api \
 		-c "sqlite3 /app/app.db"
 

@@ -2,12 +2,12 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, quarter, year, count, lit
 from pyspark.sql import functions as F
 
-def get_hiring_quarterly_report():
-    spark = SparkSession.builder \
+spark = SparkSession.builder \
         .appName("HiringQuarterlyReport") \
         .config("spark.driver.extraClassPath", "drivers/sqlite-jdbc-3.36.0.3.jar") \
         .getOrCreate()
 
+def get_hiring_quarterly_report():
     jdbc_url = "jdbc:sqlite:app.db"
     query = "(SELECT he.id, he.datetime, j.job, d.department FROM hired_employees he JOIN jobs j ON he.job_id = j.id JOIN departments d ON he.department_id = d.id) AS hired_info"
 
@@ -22,9 +22,6 @@ def get_hiring_quarterly_report():
     result = df_quartered.groupBy("department", "job", "quarter").agg(count("id").alias("hires"))
     pivoted = result.groupBy("department", "job").pivot("quarter", [1, 2, 3, 4]).sum("hires")
 
-    filled = pivoted.fillna(0).orderBy("department", "job")
+    result = pivoted.fillna(0).orderBy("department", "job")
 
-    data = [row.asDict() for row in filled.collect()]
-
-    spark.stop()
-    return data
+    return result

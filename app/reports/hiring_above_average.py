@@ -1,12 +1,12 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, year, count, avg
 
-def generate_hiring_above_average_report():
-    spark = SparkSession.builder \
+spark = SparkSession.builder \
         .appName("HiringAboveAverage") \
         .config("spark.driver.extraClassPath", "drivers/sqlite-jdbc-3.36.0.3.jar") \
         .getOrCreate()
 
+def generate_hiring_above_average_report():
     jdbc_url = "jdbc:sqlite:app.db"
 
     query = """
@@ -37,8 +37,4 @@ def generate_hiring_above_average_report():
         .withColumnRenamed("department_id", "id") \
         .orderBy(col("hired").desc())
 
-    data = [row.asDict() for row in result.collect()]
-
-    spark.stop()
-
-    return data
+    return result

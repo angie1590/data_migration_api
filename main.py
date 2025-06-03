@@ -8,6 +8,7 @@ from app.core.logger import logger
 from app.routers.department_router import router as department_router
 from app.routers.job_router import router as job_router
 from app.routers.hired_employee_router import router as hired_employee_router
+from app.routers.reports import router as reports_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -19,24 +20,14 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(
     title="Data Migration API",
-    description="""
-        The Data Migration API is a Proof of Concept (PoC) built to support a large-scale data migration project.
-
-        This API allows you to:
-
-        1. Load historic data from CSV files into a SQL database.
-        2. Receive and validate new data via REST endpoints.
-        - Supports single and batch transactions (1 to 1000 rows).
-        - Validates data against business rules and schema definitions.
-        3. Export backups of each table in AVRO format.
-        4. Restore tables from AVRO backups.
-
-        All endpoints are designed to be secure, versioned, and easily integrable in automated pipelines.
-        """,
+    description="API for managing departments, jobs, and hired employees, including analytical reports.",
     version="1.0.0",
     lifespan=lifespan
 )
-
+# Challenge 1: Ingestion APIs
 app.include_router(department_router, prefix="/departments", tags=["Departments"])
 app.include_router(job_router, prefix="/jobs", tags=["Jobs"])
 app.include_router(hired_employee_router, prefix="/hired-employees", tags=["Hired Employees"])
+
+# Challenge 2: Reporting endpoints
+app.include_router(reports_router, prefix="/reports", tags=["Reports"])

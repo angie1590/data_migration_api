@@ -35,6 +35,9 @@ restore-all:
 clean-data:
 	PYTHONPATH=. python -m utils.clean_data
 
+dashboard-create:
+	PYTHONPATH=. streamlit run app/dashboard/hiring_dashboard.py
+
 # ---------- DOCKER COMMANDS ----------
 
 docker-build:
@@ -77,6 +80,16 @@ docker-inspect-db:
 
 docker-clean-data:
 	docker exec data-api env PYTHONPATH=/app python -m utils.clean_data
+
+docker-dashboard:
+	docker run -it --rm \
+		-p 8501:8501 \
+		--env PYTHONPATH=/app \
+		-v $(CURDIR):/app \
+		data-migration-api \
+		streamlit run app/dashboard/hiring_dashboard.py --server.port 8501 --server.enableCORS false
+
+
 
 
 

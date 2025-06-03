@@ -5,5 +5,4 @@ pydantic
 pandas
 fastavro
 pyspark
-matplotlib
-seaborn
+streamlit

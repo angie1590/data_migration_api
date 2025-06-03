@@ -22,6 +22,12 @@ def get_hiring_quarterly_report():
     result = df_quartered.groupBy("department", "job", "quarter").agg(count("id").alias("hires"))
     pivoted = result.groupBy("department", "job").pivot("quarter", [1, 2, 3, 4]).sum("hires")
 
-    result = pivoted.fillna(0).orderBy("department", "job")
+    pivoted = pivoted.fillna(0).orderBy("department", "job")
 
-    return result
+    final = pivoted \
+        .withColumnRenamed("1", "Q1") \
+        .withColumnRenamed("2", "Q2") \
+        .withColumnRenamed("3", "Q3") \
+        .withColumnRenamed("4", "Q4")
+
+    return final

@@ -38,6 +38,9 @@ clean-data:
 dashboard-create:
 	PYTHONPATH=. streamlit run app/dashboard/hiring_dashboard.py
 
+create-bash-files:
+	PYTHONPATH=. python -m utils.generate_batches_data
+
 # ---------- DOCKER COMMANDS ----------
 
 docker-build:
@@ -89,6 +92,8 @@ docker-dashboard:
 		data-migration-api \
 		streamlit run app/dashboard/hiring_dashboard.py --server.port 8501 --server.enableCORS false
 
+docker-create-bash-files:
+	docker exec -it data-api env PYTHONPATH=/app python -m utils.generate_batches_data
 
 
 

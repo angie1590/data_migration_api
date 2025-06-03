@@ -6,8 +6,13 @@ RUN apt-get update && \
         xz-utils \
         sqlite3 \
         make \
+        openjdk-17-jdk \
     && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+
+ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+ENV PATH="$JAVA_HOME/bin:$PATH"
 
 WORKDIR /app
 

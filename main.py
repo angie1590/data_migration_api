@@ -8,7 +8,7 @@ from app.core.logger import logger
 from app.routers.department_router import router as department_router
 from app.routers.job_router import router as job_router
 from app.routers.hired_employee_router import router as hired_employee_router
-from app.routers.reports import router as reports_router
+from app.routers.hiring_quarterly_report_router import router as hiring_quarterly_report_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -30,4 +30,4 @@ app.include_router(job_router, prefix="/jobs", tags=["Jobs"])
 app.include_router(hired_employee_router, prefix="/hired-employees", tags=["Hired Employees"])
 
 # Challenge 2: Reporting endpoints
-app.include_router(reports_router, prefix="/reports", tags=["Reports"])
+app.include_router(hiring_quarterly_report_router, prefix="/reports", tags=["Reports"])

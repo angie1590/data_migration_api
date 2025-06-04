@@ -1,0 +1,6 @@
+pyspark==3.5.1
+pymongo>=4.0
+fastavro
+fastapi
+uvicorn
+pydantic

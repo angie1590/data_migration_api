@@ -2,6 +2,8 @@
 
 This is a Proof of Concept (PoC) API built with FastAPI to support a large-scale data migration pipeline. It enables loading historical data from CSV files, managing data via REST endpoints, and backing up or restoring table contents in AVRO format. Also, It generate reports using this data and visualize them using Streamlite.
 
+Note: This solution (first part: Load Historical data, backup and restore and data ingestion via API Rest) was implemented using pyspark and mongo too. It is in the folder data-migration-spark-mongo
+
 ---
 
 ## 🚀 Features

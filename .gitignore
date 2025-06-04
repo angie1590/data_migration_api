@@ -21,6 +21,7 @@ data_migration_spark_mongo/venv-optimized
 
 # AVRO backup files
 /backups/*.avro
+data_migration_spark_mongo/backups
 
 # Log files
 *.log
@@ -36,3 +37,6 @@ Thumbs.db
 *.pid
 *.tar
 *.bak
+
+# Mock data
+*_batch_1000.json

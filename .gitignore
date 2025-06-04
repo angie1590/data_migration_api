@@ -10,6 +10,7 @@ build/
 # Virtual environments
 venv/
 env/
+data_migration_spark_mongo/venv-optimized
 
 # Environment variables
 .env
@@ -20,6 +21,8 @@ env/
 
 # AVRO backup files
 /backups/*.avro
+/data_migration_spark_mongo/backups/
+
 
 # Log files
 *.log
@@ -35,3 +38,8 @@ Thumbs.db
 *.pid
 *.tar
 *.bak
+
+# Mock data
+departments_batch_1000.json
+jobs_batch_1000.json
+hired_employees_batch_1000.json

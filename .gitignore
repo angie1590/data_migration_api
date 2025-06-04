@@ -21,9 +21,8 @@ data_migration_spark_mongo/venv-optimized
 
 # AVRO backup files
 /backups/*.avro
-data_migration_spark_mongo/backups/*_SUCCESS
-data_migration_spark_mongo/backups/*.crc
-data_migration_spark_mongo/backups/part-*
+/data_migration_spark_mongo/backups/
+
 
 # Log files
 *.log
